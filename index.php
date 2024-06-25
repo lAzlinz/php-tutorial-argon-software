@@ -1,15 +1,10 @@
 <?php
 
-/**
- * @var $names A list of names.
- */
-$names = [
-    'Name 01',
-    'Name 02',
-    'Name 03'
+$person = [
+    'age' => 31,
+    'hair' => 'brown'
 ];
 
-$name = 'Azriel';
-$greeting = 'Greetings';
+
 
 require 'index.view.php';
