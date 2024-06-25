@@ -20,3 +20,28 @@
 		return $age >= 21 ? true : false;
 	}
 
+	/**
+	 * Make a PDO to your mysql.
+	 *
+	 * @return PDO
+	 */
+	function connectToDB(): PDO {
+		try {
+			return new PDO(dsn:'mysql:host=127.0.0.1;dbname=todo_db', username:'root', password:'');
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
+
+	/**
+	 * Get all the tasks in the database.
+	 *
+	 * @param PDO $pdo
+	 * @return array|false
+	 */
+	function fetchAllTasks(PDO $pdo): array|false {
+		$statement = $pdo->prepare('SELECT * FROM todos_t');
+		$statement->execute();
+		return $statement->fetchAll(PDO::FETCH_CLASS, 'Task'); 
+	}
+

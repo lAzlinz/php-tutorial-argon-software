@@ -1,15 +1,11 @@
 <?php
 
-try {
-    $pdo = new PDO(dsn:'mysql:host=127.0.0.1;dbname=todo_db', username:'root', password:'');
-} catch (PDOException $e) {
-    die($e->getMessage());
-}
+require 'Task.php';
+require 'functions.php';
 
-$statement = $pdo->prepare('SELECT * FROM todos_t');
-$statement->execute();
+$pdo = connectToDB();
 
-$tasks = $statement->fetchAll(PDO::FETCH_OBJ);
+$tasks = fetchAllTasks(pdo:$pdo);
 
 $tasks[0]->completed = true;
 
