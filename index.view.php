@@ -6,14 +6,16 @@
 	<title>Document</title>
 </head>
 <body>
-	<?php foreach ($tasks as $task) : ?>
-		<h1>
-			<?php if ($task->isComplete()) :?>
-				<strike><?= $task->getDescription(); ?></strike>
-			<?php else: ?>
-				<?= $task->getDescription(); ?>
-			<?php endif; ?>
-		</h1>
-	<?php endforeach; ?>
+	<ul>
+		<?php foreach ($tasks as $task) : ?>
+			<li>
+				<?php if ($task->completed) : ?>
+					<strike><?= $task->description; ?></strike>
+				<?php else : ?>
+					<?= $task->description; ?>
+				<?php endif; ?>
+			</li>
+		<?php endforeach; ?>
+	</ul>
 </body>
 </html>

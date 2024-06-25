@@ -1,49 +1,16 @@
 <?php
 
-require 'functions.php';
-
-class Task {
-
-    protected $description;
-    protected $completed = false;
-    
-    public function __construct(string $description) {
-        $this->setDescription($description);
-    }
-
-    public function isComplete(): bool {
-        return $this->completed;
-    }
-
-    public function complete() {
-        $this->completed = true;
-    }
-
-    public function getDescription(): string {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): void {
-        $this->description = $description;
-    }
-
-    /**
-     * Generate a Task
-     *
-     * @param string $description The description of the task.
-     * @return Task
-     */
-    public static function generate(string $description): Task {
-        return new Task($description);
-    }
+try {
+    $pdo = new PDO(dsn:'mysql:host=127.0.0.1;dbname=todo_db', username:'root', password:'');
+} catch (PDOException $e) {
+    die($e->getMessage());
 }
 
-$tasks = [
-    Task::generate('Go to the store'),
-    Task::generate('Clean my room'),
-    Task::generate('Eat lunch')
-];
+$statement = $pdo->prepare('SELECT * FROM todos_t');
+$statement->execute();
 
-$tasks[0]->complete();
+$tasks = $statement->fetchAll(PDO::FETCH_OBJ);
+
+$tasks[0]->completed = true;
 
 require 'index.view.php';
