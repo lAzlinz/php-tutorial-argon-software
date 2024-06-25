@@ -6,10 +6,13 @@
 	<title>Document</title>
 </head>
 <body>
+	<h1>Task for Today!</h1>
+
 	<ul>
-		<?php foreach ($person as $key => $feature) : ?>
-			<li><strong><?= $key; ?></strong>: <?= $feature; ?></li>
-		<?php endforeach; ?>
+		<li><strong>Name: </strong><?= $task['title'];?></li>
+		<li><strong>Due Date: </strong><?= $task['due'];?></li>
+		<li><strong>Person responsible: </strong><?= $task['assigned_to'];?></li>
+		<li><strong>Status: </strong><?= $task['completed'] ? 'Done' : 'Not Done';?></li>
 	</ul>
 </body>
 </html>
