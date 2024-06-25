@@ -18,6 +18,12 @@ class QueryBuilder {
 	public function selectAll(string $tableName, string $convertToClass): array|false {
 		$statement = $this->pdo->prepare("SELECT * FROM {$tableName}");
 		$statement->execute();
-		return $convertToClass::convertAllTo($statement->fetchAll(PDO::FETCH_CLASS));
+		if (is_subclass_of($convertToClass, IQueryConverter::class)) {
+			echo 'Converted';
+			return $convertToClass::convertAllTo($statement->fetchAll(PDO::FETCH_CLASS));
+		} else {
+			echo 'Not Converted';
+			return $statement->fetchAll(PDO::FETCH_CLASS);
+		}
 	}
 }
