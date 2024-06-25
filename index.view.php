@@ -6,30 +6,14 @@
 	<title>Document</title>
 </head>
 <body>
-	<h1>Task for Today!</h1>
-
-	<ul>
-		<li>
-			<strong>Name: </strong>
-			<?= $task['title'];?>
-		</li>
-		<li>
-			<strong>Due Date: </strong>
-			<?= $task['due'];?>
-		</li>
-		<li>
-			<strong>Person Responsible: </strong>
-			<?= $task['assigned_to'];?>
-		</li>
-		<li>
-			<strong>Status: </strong>
-			<!-- <?= $task['completed'] ? 'Done' : 'Not Done';?> -->
-			<?php if (! $task['completed']) : ?>
-				<?= '&#9745 To Do'; ?>
-			<?php else : ?>
-				<?= '&#9745 Done'; ?>
+	<?php foreach ($tasks as $task) : ?>
+		<h1>
+			<?php if ($task->isComplete()) :?>
+				<strike><?= $task->getDescription(); ?></strike>
+			<?php else: ?>
+				<?= $task->getDescription(); ?>
 			<?php endif; ?>
-		</li>
-	</ul>
+		</h1>
+	<?php endforeach; ?>
 </body>
 </html>
