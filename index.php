@@ -11,4 +11,7 @@ echo '<pre>';
 echo var_dump($person); // To echo non-primitive variables
 echo '</pre>';
 
+die('End message.'); // code ends here.
+// Does not run the code after it.
+
 require 'index.view.php';
