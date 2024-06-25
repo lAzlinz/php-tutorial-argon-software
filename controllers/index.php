@@ -2,6 +2,6 @@
 
 require 'core/Task.php';
 
-$tasks = $query->selectAll(tableName:'todos_t', convertToClass:Task::class);
+$tasks = $app['database']->selectAll(tableName:'todos_t', convertToClass:Task::class);
 
 require 'views/index.view.php';

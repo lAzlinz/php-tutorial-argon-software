@@ -1,10 +1,14 @@
 <?php
 
+$app = [];
+
 require 'core/Router.php';
+require 'core/Request.php';
 require 'core/database/Connection.php';
 require 'core/database/QueryBuilder.php';
-$config = require 'config.php';
 
-return $query = new QueryBuilder(
-    pdo:Connection::make($config['database'])
+$app['config'] = require 'config.php';
+
+$app['database'] = new QueryBuilder(
+    pdo:Connection::make($app['config']['database'])
 );

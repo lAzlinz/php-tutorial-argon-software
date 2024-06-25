@@ -4,7 +4,7 @@ return [
     'database' => [
         'name' => 'todo_db',
         'username' => 'root',
-        'password' => '',
+        'password' => 'mysqlAzitron2003',
         'connection' => 'mysql',
         'host' => '127.0.0.1',
         'options' => [
