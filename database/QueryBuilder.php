@@ -15,9 +15,9 @@ class QueryBuilder {
 	 * @param string $intoClass The class the output will take.
 	 * @return array|false
 	 */
-	public function selectAll(string $tableName, callable $converter): array|false {
+	public function selectAll(string $tableName, string $convertToClass): array|false {
 		$statement = $this->pdo->prepare("SELECT * FROM {$tableName}");
 		$statement->execute();
-		return $converter($statement->fetchAll(PDO::FETCH_CLASS));
+		return $convertToClass::convertAllTo($statement->fetchAll(PDO::FETCH_CLASS));
 	}
 }

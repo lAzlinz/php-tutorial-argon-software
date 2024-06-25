@@ -1,6 +1,8 @@
 <?php
 
-class Task {
+require 'database/IQueryConverter.php';
+
+class Task implements IQueryConverter {
     public string $description;
     public bool $completed = false;
 
@@ -22,13 +24,12 @@ class Task {
         $this->completed = $completed;
     }
 
-    //
-    public static function convertAllTo(array $toBeConverted) {
-        $converted = array_map(['Task', 'convertTo'], $toBeConverted);
+    public static function convertAllTo(array $toBeConverted): array {
+        $converted = array_map(function ($convert) {return self::convertTo($convert);}, $toBeConverted);
         return $converted;
     }
 
-    private static function convertTo(stdClass $toBeConverted): Task {
+    private static function convertTo(stdClass $toBeConverted): object {
         $task = new Task();
         $task->setDescription($toBeConverted->description);
         $task->setCompleted($toBeConverted->completed);
