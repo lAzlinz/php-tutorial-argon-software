@@ -7,11 +7,6 @@ $person = [
 
 $person['name'] = 'Azriel'; // added at the end of the associative array
 
-echo '<pre>';
-echo var_dump($person); // To echo non-primitive variables
-echo '</pre>';
-
-die('End message.'); // code ends here.
-// Does not run the code after it.
+unset($person['name']); // remove an element of an associative array via its key
 
 require 'index.view.php';
