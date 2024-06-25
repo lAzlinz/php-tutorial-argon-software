@@ -1,12 +1,11 @@
 <?php
 
+$query = require 'bootstrap.php';
+
 require 'Task.php';
-require 'functions.php';
 
-$pdo = connectToDB();
+$tasks = $query->selectAll(tableName:'todos_t', converter:['Task', 'convertAllTo']);
 
-$tasks = fetchAllTasks(pdo:$pdo);
-
-$tasks[0]->completed = true;
+$tasks[0]->setCompleted(true);
 
 require 'index.view.php';
