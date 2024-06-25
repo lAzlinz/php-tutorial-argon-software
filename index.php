@@ -7,8 +7,6 @@ $person = [
 
 $person['name'] = 'Azriel'; // added at the end of the associative array
 
-$animals = ['cat', 'dog'];
-$animals[] = 'bird'; // added at the end of the normal array (no key needed)
-
+echo var_dump($person); // To echo non-primitive variables
 
 require 'index.view.php';
