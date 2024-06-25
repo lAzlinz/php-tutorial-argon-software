@@ -1,11 +1,9 @@
 <?php
 
-$query = require 'bootstrap.php';
+$database = require 'core/bootstrap.php';
 
-require 'Task.php';
+$router = new Router();
 
-$tasks = $query->selectAll(tableName:'todos_t', convertToClass:Task::class);
+require 'routes.php';
 
-$tasks[0]->setCompleted(true);
-
-require 'index.view.php';
+require $router->direct(trim($_SERVER['REQUEST_URI'], '/'));
