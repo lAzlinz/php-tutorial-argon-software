@@ -9,10 +9,27 @@
 	<h1>Task for Today!</h1>
 
 	<ul>
-		<li><strong>Name: </strong><?= $task['title'];?></li>
-		<li><strong>Due Date: </strong><?= $task['due'];?></li>
-		<li><strong>Person responsible: </strong><?= $task['assigned_to'];?></li>
-		<li><strong>Status: </strong><?= $task['completed'] ? 'Done' : 'Not Done';?></li>
+		<li>
+			<strong>Name: </strong>
+			<?= $task['title'];?>
+		</li>
+		<li>
+			<strong>Due Date: </strong>
+			<?= $task['due'];?>
+		</li>
+		<li>
+			<strong>Person Responsible: </strong>
+			<?= $task['assigned_to'];?>
+		</li>
+		<li>
+			<strong>Status: </strong>
+			<!-- <?= $task['completed'] ? 'Done' : 'Not Done';?> -->
+			<?php if (! $task['completed']) : ?>
+				<?= '&#9745 To Do'; ?>
+			<?php else : ?>
+				<?= '&#9745 Done'; ?>
+			<?php endif; ?>
+		</li>
 	</ul>
 </body>
 </html>
