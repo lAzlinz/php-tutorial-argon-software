@@ -1,9 +1,43 @@
 <?php
 
-require 'core/bootstrap.php';
+class Post
+{
+    public string $title;
 
-$router = new Router();
+    public bool $published;
 
-require 'routes.php';
+    public string $author;
 
-require $router->direct(Request::uri());
+    public function __construct(string $title, string $author, bool $published)
+    {
+        $this->title = $title;
+        $this->author = $author;
+        $this->published = $published;
+    }
+}
+
+
+$posts = [
+    new Post('My First Post', 'AV', true),
+    new Post('My Second Post', 'CV', true),
+    new Post('My Third Post', 'AV', true),
+    new Post('My Fourth Post', 'YT', false)
+];
+
+$unpublishedPosts = array_filter($posts, function (Post $post): bool {
+    return ! $post->published;
+});
+
+$publishedPosts = array_filter($posts, function (Post $post): bool {
+    return $post->published;
+});
+
+$posts = array_map(function ($post): array {
+    return (array) $post;
+}, $posts);
+
+$titles = array_column($posts,'author', 'title');
+
+foreach (array_keys($titles) as $title) {
+    echo $title . ', by ' . $titles[$title] . '<br>';
+}
