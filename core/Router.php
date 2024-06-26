@@ -11,6 +11,13 @@ class Router {
         'POST' => []
     ];
 
+    public static function load(string $file) {
+        $router = new Router();
+
+        require $file;
+        return $router;
+    }
+
     public function get($uri, $controller) {
         $this->routes['GET'][$uri] = $controller;
     }

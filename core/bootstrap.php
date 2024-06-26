@@ -13,5 +13,5 @@ App::bind(
 
 function view(string $viewName, array $data = []): string {
     extract($data);
-    return require "views/{$viewName}.view.php";
+    return require "app/views/{$viewName}.view.php";
 }
