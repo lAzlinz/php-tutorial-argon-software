@@ -2,7 +2,8 @@
 
 <h1>Submit Your Name!</h1>
 <form method="POST" action="/names">
-	<input name="name" type="text">
+	<input name="username" type="text">
+	<input name="password" type="password">
 	<button type="submit">submit</button>
 </form>
 

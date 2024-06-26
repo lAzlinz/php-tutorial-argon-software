@@ -26,4 +26,14 @@ class QueryBuilder {
 			return $statement->fetchAll(PDO::FETCH_CLASS);
 		}
 	}
+
+	public function addAccount(String $username, string $password): bool {
+		$statement = $this->pdo->prepare(
+			"INSERT INTO accounts_t (username, password) VALUES (:username, :password)"
+		);
+
+		$statement->bindParam(':username', $username);
+		$statement->bindParam(':password', $password);
+		return $statement->execute();
+	}
 }
