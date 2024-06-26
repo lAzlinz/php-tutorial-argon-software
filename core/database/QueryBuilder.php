@@ -19,10 +19,8 @@ class QueryBuilder {
 		$statement = $this->pdo->prepare("SELECT * FROM {$tableName}");
 		$statement->execute();
 		if (is_subclass_of($convertToClass, IQueryConverter::class)) {
-			echo 'Converted';
 			return $convertToClass::convertAllTo($statement->fetchAll(PDO::FETCH_CLASS));
 		} else {
-			echo 'Not Converted';
 			return $statement->fetchAll(PDO::FETCH_CLASS);
 		}
 	}
