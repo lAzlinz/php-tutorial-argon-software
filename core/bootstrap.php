@@ -8,10 +8,9 @@ App::bind(
     )
 );
 
-// $app = [];
-
-// $app['config'] = require 'config.php';
-
-// $app['database'] = new QueryBuilder(
-//     pdo:Connection::make($app['config']['database'])
-// );
+function view(string $viewName, array $data = null): string {
+    if (! is_null($data)) {
+        extract($data);
+    }
+    return require "views/{$viewName}.view.php";
+}

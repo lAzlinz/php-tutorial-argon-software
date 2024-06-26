@@ -8,4 +8,4 @@ $router = new Router();
 
 require 'routes.php';
 
-require $router->direct(Request::uri(), Request::method());
+$router->direct(Request::uri(), Request::method());
