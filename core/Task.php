@@ -1,6 +1,7 @@
 <?php
 
 require 'database/IQueryConverter.php';
+use App\Core\Database\IQueryConverter;
 
 class Task implements IQueryConverter {
     public string $description;

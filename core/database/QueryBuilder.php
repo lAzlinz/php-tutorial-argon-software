@@ -1,10 +1,14 @@
 <?php
 
+namespace App\Core\Database;
+
+use \PDO;
+
 class QueryBuilder {
 
     protected PDO $pdo;
 
-    public function __construct(PDO $pdo) {
+    public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
 
@@ -19,9 +23,9 @@ class QueryBuilder {
 		$statement = $this->pdo->prepare("SELECT * FROM {$tableName}");
 		$statement->execute();
 		if (is_subclass_of($convertToClass, IQueryConverter::class)) {
-			return $convertToClass::convertAllTo($statement->fetchAll(PDO::FETCH_CLASS));
+			return $convertToClass::convertAllTo($statement->fetchAll(\PDO::FETCH_CLASS));
 		} else {
-			return $statement->fetchAll(PDO::FETCH_CLASS);
+			return $statement->fetchAll(\PDO::FETCH_CLASS);
 		}
 	}
 
@@ -37,7 +41,7 @@ class QueryBuilder {
 		try {
 			$statement = $this->pdo->prepare($sql);
 			$statement->execute($fields);
-		} catch (PDOException $e) {
+		} catch (\PDOException $e) {
 			die('Whoops, something went wrong.');
 		}
 

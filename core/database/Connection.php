@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Core\Database;
+
+use \PDO;
+use \PDOException;
+
 class Connection {
     protected PDO $pdo;
 
@@ -12,19 +17,10 @@ class Connection {
 				$config['password'],
 				$config['options']
 			);
-			// return new PDO(dsn:'mysql:host=127.0.0.1;dbname=todo_db', username:'root', password:'');
+			// return new \PDO(dsn:'mysql:host=127.0.0.1;dbname=todo_db', username:'root', password:'');
 		} catch (PDOException $e) {
 			echo 'ERORRR!';
 			die($e->getMessage());
 		}
     }
-
-    /**
-	 * Make a PDO to your mysql.
-	 *
-	 * @return PDO
-	 */
-	// function connectToDB(): PDO {
-		
-	// }
 }

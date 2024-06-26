@@ -1,6 +1,9 @@
 <?php
 
+namespace App\Core;
+
 require 'database/IQueryConverter.php';
+use App\Core\Database\IQueryConverter;
 
 class MyName implements IQueryConverter {
     public string $name;
@@ -10,7 +13,7 @@ class MyName implements IQueryConverter {
         return $converted;
     }
 
-    private static function convertTo(stdClass $toBeConverted): object {
+    private static function convertTo(\stdClass $toBeConverted): object {
         $name = new self();
         $name->name = $toBeConverted->name;
         return $name;
