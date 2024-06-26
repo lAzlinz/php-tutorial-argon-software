@@ -1,3 +1,3 @@
 <?php
 
-var_dump($_GET['name']);
+echo 'You typed ' . $_POST['name'];
