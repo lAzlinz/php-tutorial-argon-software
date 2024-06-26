@@ -16,6 +16,14 @@ class Post
     }
 }
 
+function isPublished(Post $post): bool {
+    return $post->published;
+}
+
+function isNotPublished(Post $post): bool {
+    return ! $post->published;
+}
+
 
 $posts = [
     new Post('My First Post', 'AV', true),
@@ -24,13 +32,9 @@ $posts = [
     new Post('My Fourth Post', 'YT', false)
 ];
 
-$unpublishedPosts = array_filter($posts, function (Post $post): bool {
-    return ! $post->published;
-});
+$unpublishedPosts = array_filter($posts, 'isNotPublished');
 
-$publishedPosts = array_filter($posts, function (Post $post): bool {
-    return $post->published;
-});
+$publishedPosts = array_filter($posts, 'isPublished');
 
 $posts = array_map(function ($post): array {
     return (array) $post;
@@ -41,3 +45,5 @@ $titles = array_column($posts,'author', 'title');
 foreach (array_keys($titles) as $title) {
     echo $title . ', by ' . $titles[$title] . '<br>';
 }
+
+var_dump($publishedPosts);
