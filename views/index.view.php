@@ -6,4 +6,10 @@
 	<button type="submit">submit</button>
 </form>
 
+<ul>
+	<?php foreach ($names as $name): ?>
+		<li><?= $name->name; ?></li>
+	<?php endforeach; ?>
+</ul>
+
 <?php require('partials/footer.php'); ?>

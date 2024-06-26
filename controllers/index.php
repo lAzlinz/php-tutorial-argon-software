@@ -1,7 +1,7 @@
 <?php
 
-require 'core/Task.php';
+require 'core/MyName.php';
 
-$tasks = $app['database']->selectAll('todos_t', convertToClass:Task::class);
+$names = $app['database']->selectAll('users_t', MyName::class);
 
 require 'views/index.view.php';
