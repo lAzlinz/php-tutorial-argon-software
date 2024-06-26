@@ -1,49 +1,90 @@
 <?php
 
-class Post
+enum Status: string {
+    case Todo = 'todo';
+    case Done = 'done';
+    case Archived = 'archived';
+}
+
+class MyTask
 {
-    public string $title;
+    protected string $description;
+    protected Status $status;
 
-    public bool $published;
+    private function __construct(string $description, Status $status) {
+        $this->setDescription($description);
+        $this->setStatus($status);
+    }
 
-    public string $author;
+    // others
 
-    public function __construct(string $title, string $author, bool $published)
-    {
-        $this->title = $title;
-        $this->author = $author;
-        $this->published = $published;
+    public function done(): void {
+        $this->setStatus(Status::Done);
+    }
+
+    public function archive(): void {
+        $this->setStatus(Status::Archived);
+    }
+
+    // Getters
+    public function getDescription(): string {
+        return $this->description;
+    }
+    public function getStatus(): Status {
+        return $this->status;
+    }
+
+    // Setters
+    public function setDescription(string $description): void {
+        $this->description = $description;
+    }
+    public function setStatus(Status $status): void {
+        $this->status = $status;
+    }
+
+    // Static Functions
+
+    public static function createTask(string $description): self {
+        $task = new self(description:$description, status:Status::Todo);
+        return $task;
+    }
+
+    /**
+     * Only get the tasks with done status.
+     * @param array<self> $tasks The array of tasks.
+     * @return array<self>
+     */
+    public static function filterDoneTasks(array $tasks): array {
+        return array_filter($tasks, function (self $task) { return ! $task->getStatus() == Status::Done; });
+    }
+
+    /**
+     * Only get the tasks with todo status.
+     * @param array<self> $tasks The array of tasks.
+     * @return array<self>
+     */
+    public static function filterTodoTasks(array $tasks): array {
+        return array_filter($tasks, function (self $task) { return $task->getStatus() == Status::Todo; });
     }
 }
 
-function isPublished(Post $post): bool {
-    return $post->published;
-}
-
-function isNotPublished(Post $post): bool {
-    return ! $post->published;
-}
-
-
-$posts = [
-    new Post('My First Post', 'AV', true),
-    new Post('My Second Post', 'CV', true),
-    new Post('My Third Post', 'AV', true),
-    new Post('My Fourth Post', 'YT', false)
+$tasks = [
+    'Task 1',
+    'Task 2',
+    'Task 3',
+    'Take out the Trash'
 ];
 
-$unpublishedPosts = array_filter($posts, 'isNotPublished');
+$tasks = array_map(function ($taskDescription): MyTask {
+    return MyTask::createTask($taskDescription);
+}, $tasks);
 
-$publishedPosts = array_filter($posts, 'isPublished');
+$tasks[0]->done();
+$tasks[2]->done();
 
-$posts = array_map(function ($post): array {
-    return (array) $post;
-}, $posts);
+$toDoTasks = MyTask::filterTodoTasks($tasks);
 
-$titles = array_column($posts,'author', 'title');
-
-foreach (array_keys($titles) as $title) {
-    echo $title . ', by ' . $titles[$title] . '<br>';
+foreach ($toDoTasks as $task) {
+    var_dump($task);
+    echo '<br>';
 }
-
-var_dump($publishedPosts);
